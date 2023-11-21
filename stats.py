@@ -59,7 +59,7 @@ def parse_data(items: list) -> List[PR]:
         repo_url = item["repository_url"]
         repo_name = get_repo_name(repo_url)
         pr = item["pull_request"]
-        pr_url = pr["url"]
+        pr_url = pr["html_url"]
         merged_at = pr["merged_at"]
         if merged_at:
             merged_at = format_date(merged_at)
