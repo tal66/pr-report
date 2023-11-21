@@ -82,7 +82,9 @@ def gen_readme(items: list[PR]):
 
     template_str = """
 ## Pull Request Report
-{{ today }}
+Date: {{ today }}
+
+User: {{ author }}
 
 ### Pull Requests
 {% for pr in items %}
@@ -97,7 +99,7 @@ def gen_readme(items: list[PR]):
 
     today = datetime.utcnow().strftime('%Y-%m-%d')
     template = Template(template_str)
-    result = template.render(items=items, today=today)
+    result = template.render(items=items, today=today, author=author)
 
     with open("README.md", "w") as readme_file:
         readme_file.write(result)
