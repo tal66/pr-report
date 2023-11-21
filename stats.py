@@ -1,16 +1,18 @@
 import logging
+import os
 from datetime import datetime, timedelta
-from typing import List
 from urllib.parse import urlparse
 
 import requests
+from jinja2 import Template
 
 logging.basicConfig(format='%(levelname)s: %(message)s', encoding='utf-8', level=logging.DEBUG)
 
-author = "tal66"
-max_pages = 10
-stale_after_days = 30
-base_url = f'https://api.github.com/search/issues'
+AUTHOR = "tal66"
+MAX_PAGES = 10
+STALE_AFTER_DAYS = 30
+BASE_URL = 'https://api.github.com/search/issues'
+GITHUB_TOKEN = os.getenv('GITHUB_TOKEN', "")
 
 
 class PR:
@@ -23,22 +25,32 @@ class PR:
 
 
 def fetch_data() -> list:
+    """
+    fetch PR's by AUTHOR from github.
+    w/o token => rate limit 10 pages/minute.
+    with token => rate limit 30 pages/minute
+    """
     result = []
     page_num = 0
     with requests.Session() as session:
-        while page_num < max_pages:
+        while page_num < MAX_PAGES:
             page_num += 1
             logging.info(f"fetching page {page_num}")
 
+            headers = {'Authorization': f'token {GITHUB_TOKEN}'}
+            if not GITHUB_TOKEN:
+                headers = {}
+
             # get
-            response = session.get(f"{base_url}?q=is:pr+author:{author}&page={page_num}")
+            response = session.get(f"{BASE_URL}?q=is:pr+author:{AUTHOR}&page={page_num}", headers=headers)
+            if not response.ok:
+                logging.error(f"{response.status_code} {response.reason}")
+                return []
             logging.debug(f"response {response.status_code}")
+            logging.debug(f"X-Ratelimit-Remaining {response.headers.get('X-Ratelimit-Remaining')}")
             data = response.json()
             items = data.get('items', [])
             logging.debug(f'items count: {len(items)} / total count: {data["total_count"]}')
-
-            if not items:
-                break
 
             if data["incomplete_results"]:
                 logging.warning("incomplete results")
@@ -46,10 +58,13 @@ def fetch_data() -> list:
             # save
             result.extend(items)
 
+            if not items or data["total_count"] == len(result):
+                break
+
     return result
 
 
-def parse_data(items: list) -> List[PR]:
+def parse_data(items: list) -> list[PR]:
     count = 0
     skip_count = 0
     parsed_items = []
@@ -78,7 +93,6 @@ def parse_data(items: list) -> List[PR]:
 
 def gen_readme(items: list[PR]):
     logging.info(f"generating report for {len(items)} items")
-    from jinja2 import Template
 
     template_str = """
 ## Pull Request Report
@@ -100,7 +114,7 @@ User: {{ author }}
 
     today = datetime.utcnow().strftime('%Y-%m-%d')
     template = Template(template_str)
-    result = template.render(items=items, today=today, author=author)
+    result = template.render(items=items, today=today, author=AUTHOR)
 
     with open("README.md", "w") as readme_file:
         readme_file.write(result)
@@ -109,12 +123,14 @@ User: {{ author }}
 
 
 def is_stale(created_at, merged_at) -> bool:
-    created_at_datetime = datetime.strptime(created_at, "%Y-%m-%d")
-    difference = datetime.utcnow() - created_at_datetime
-    return difference > timedelta(days=stale_after_days) and merged_at is None
+    """stale if !merged && STALE_AFTER_DAYS"""
+    created_at_dt = datetime.strptime(created_at, "%Y-%m-%d")
+    diff = datetime.utcnow() - created_at_dt
+    return diff > timedelta(days=STALE_AFTER_DAYS) and merged_at is None
 
 
 def get_repo_name(repo_url) -> str:
+    """url -> org/repo"""
     parsed_url = urlparse(repo_url)
     url_parts = parsed_url.path.split('/')
     if len(url_parts) == 4 and url_parts[1] == 'repos':
@@ -130,5 +146,7 @@ def format_date(date: str) -> str:
 
 if __name__ == '__main__':
     items = fetch_data()
+    if not items:
+        exit(1)
     parsed_items = parse_data(items)
     gen_readme(parsed_items)
