@@ -90,9 +90,10 @@ User: {{ author }}
 {% for pr in items %}
 ### [{{ pr.title }}]({{ pr.url }})
 
-- **Repository:** {{ pr.repo }}
-- **Merged At:** {% if pr.merged_at %}{{ pr.merged_at }}{% else %}Not Merged Yet{% endif %}
-{% if not pr.merged_at %}- **Created At:** {{ pr.created_at }}{% endif %}
+**Repo:** {{ pr.repo }}
+
+**Merged:** {% if pr.merged_at %}{{ pr.merged_at }}{% else %}Not Merged Yet{% endif %}
+{% if not pr.merged_at %} (Created: {{ pr.created_at }}){% endif %}
 
 {% endfor %}
 """
