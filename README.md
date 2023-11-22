@@ -1,6 +1,5 @@
-
 ## Pull Request Report
-Date: 2023-11-21
+Date: 2023-11-22
 
 User: tal66
 
@@ -10,7 +9,7 @@ User: tal66
 
 **Repo:** codethesaurus/codethesaur.us
 
-**Merged:** Not Merged Yet
+**Merged:** Pending
  (Created: 2023-11-20)
 
 
@@ -34,7 +33,7 @@ User: tal66
 
 **Repo:** cli/cli
 
-**Merged:** Not Merged Yet
+**Merged:** Pending
  (Created: 2023-11-15)
 
 
@@ -98,7 +97,7 @@ User: tal66
 
 **Repo:** CycodeLabs/raven
 
-**Merged:** Not Merged Yet
+**Merged:** Pending
  (Created: 2023-11-09)
 
 

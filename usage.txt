@@ -1,4 +1,4 @@
 usage:
 1. fork/clone
 2. change `author` variable to your username
-3. run script
+3. run script using python 3.11
