@@ -1,5 +1,5 @@
 ## Pull Request Report
-Date: 2023-11-22
+Date: 2023-11-28
 
 User: tal66
 
@@ -9,8 +9,7 @@ User: tal66
 
 **Repo:** codethesaurus/codethesaur.us
 
-**Merged:** Pending
- (Created: 2023-11-20)
+**Merged:** Closed 
 
 
 ### [fix(terraform): Ensure HTTPS in Azure Function App and App Slots](https://github.com/bridgecrewio/checkov/pull/5766)
@@ -33,8 +32,8 @@ User: tal66
 
 **Repo:** cli/cli
 
-**Merged:** Pending
- (Created: 2023-11-15)
+**Merged:** Pending (Created: 2023-11-15)
+
 
 
 ### [parametrize tests](https://github.com/numpy/numpy-financial/pull/75)
@@ -97,8 +96,8 @@ User: tal66
 
 **Repo:** CycodeLabs/raven
 
-**Merged:** Pending
- (Created: 2023-11-09)
+**Merged:** Pending (Created: 2023-11-09)
+
 
 
 ### [New rule for Lambda zip deployment](https://github.com/aws-cloudformation/cfn-lint/pull/2682)
@@ -115,6 +114,13 @@ User: tal66
 
 **Merged:** 2023-07-17
 
+
+
+### [docs: fix broken -d link in MANUAL.md](https://github.com/intel/cve-bin-tool/pull/2876)
+
+**Repo:** intel/cve-bin-tool
+
+**Merged:** Closed 
 
 
 ### [exclude default bridge network in `network prune`](https://github.com/containerd/nerdctl/pull/1304)
@@ -189,12 +195,33 @@ User: tal66
 
 
 
+### [GitHub actions: run test workflow on Mac](https://github.com/aesara-devs/aesara/pull/974)
+
+**Repo:** aesara-devs/aesara
+
+**Merged:** Closed 
+
+
+### [set optional max smtp connection lifetime](https://github.com/zulip/zulip/pull/22154)
+
+**Repo:** zulip/zulip
+
+**Merged:** Closed 
+
+
 ### [Show date of next backup](https://github.com/borgbase/vorta/pull/1319)
 
 **Repo:** borgbase/vorta
 
 **Merged:** 2022-05-29
 
+
+
+### [Make `importlib_metadata` optional on Python 3.10](https://github.com/jaraco/keyring/pull/576)
+
+**Repo:** jaraco/keyring
+
+**Merged:** Closed 
 
 
 ### [Never stale a bug issue](https://github.com/apache/camel-k/pull/3292)
@@ -229,6 +256,13 @@ User: tal66
 
 
 
+### [Make requirements.txt single source of truth](https://github.com/pytorch/data/pull/414)
+
+**Repo:** pytorch/data
+
+**Merged:** Closed 
+
+
 ### [Introduce keyword-only arguments in Bot methods](https://github.com/python-telegram-bot/python-telegram-bot/pull/3035)
 
 **Repo:** python-telegram-bot/python-telegram-bot
@@ -261,6 +295,13 @@ User: tal66
 
 
 
+### [pre-commit](https://github.com/pypa/pip-audit/pull/254)
+
+**Repo:** pypa/pip-audit
+
+**Merged:** Closed 
+
+
 ### [Find unused port for codechecker server](https://github.com/Ericsson/codechecker/pull/3663)
 
 **Repo:** Ericsson/codechecker
@@ -291,6 +332,13 @@ User: tal66
 
 **Merged:** 2022-04-18
 
+
+
+### [Add downloader example](https://github.com/grpc/grpc-dotnet/pull/1689)
+
+**Repo:** grpc/grpc-dotnet
+
+**Merged:** Closed 
 
 
 ### [Format JSON of expected response in generated test files](https://github.com/quick-perf/quickperf-live/pull/18)
